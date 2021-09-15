@@ -33,9 +33,11 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
 [
   {
     "name": "${var.app_name}-${var.app_environment}-container",
+    "cpu": 256,
+    "memory": 512,
+    "networkMode": "awsvpc",
     "image": "${aws_ecr_repository.aws-ecr.repository_url}:latest",
     "entryPoint": [],
-    "environment": "${data.template_file.env_vars.rendered}",
     "essential": true,
     "logConfiguration": {
       "logDriver": "awslogs",
@@ -50,10 +52,7 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
         "containerPort": 8080,
         "hostPort": 8080
       }
-    ],
-    "cpu": 256,
-    "memory": 512,
-    "networkMode": "awsvpc"
+    ]
   }
 ]
 DEFINITION
