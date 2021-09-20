@@ -15,10 +15,10 @@ variable "aws_key_pair_name" {
   description = "AWS Key Pair Name"
 }
 
-#variable "aws_region" {
-#  type        = string
-#  description = "AWS Region"
-#}
+variable "aws_region" {
+  type        = string
+  description = "AWS Region"
+}
 
 variable "aws_cloudwatch_retention_in_days" {
   type        = number
