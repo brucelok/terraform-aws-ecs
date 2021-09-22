@@ -87,6 +87,7 @@ resource "aws_ecs_service" "aws-ecs-service" {
 
   service_registries {
     registry_arn = "${aws_service_discovery_service.fargate.arn}"
+    port         = 8000
   }
 
   load_balancer {
