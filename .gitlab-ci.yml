@@ -29,6 +29,6 @@ deploy:
     - build
 
 cleanup:
-  extends: .cleanup
+  extends: .destroy
   dependencies:
     - deploy
