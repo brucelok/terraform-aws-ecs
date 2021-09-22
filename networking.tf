@@ -2,11 +2,11 @@
 
 resource "aws_internet_gateway" "aws-igw" {
   vpc_id = aws_vpc.my-vpc.id
+
   tags = {
     Name        = "${var.app_name}-igw"
     Environment = var.app_environment
   }
-
 }
 
 resource "aws_subnet" "private" {

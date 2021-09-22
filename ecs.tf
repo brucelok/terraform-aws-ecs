@@ -36,7 +36,7 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
     "cpu": 256,
     "memory": 512,
     "networkMode": "awsvpc",
-    "image": "${aws_ecr_repository.aws-ecr.repository_url}:latest",
+    "image": "registry.gitlab.com/lok.bruce/mkdocs:latest",
     "entryPoint": [],
     "essential": true,
     "logConfiguration": {
@@ -49,8 +49,8 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
     },
     "portMappings": [
       {
-        "containerPort": 8080,
-        "hostPort": 8080
+        "containerPort": 8000,
+        "hostPort": 8000
       }
     ]
   }
@@ -88,7 +88,7 @@ resource "aws_ecs_service" "aws-ecs-service" {
   load_balancer {
     target_group_arn = aws_lb_target_group.target_group.arn
     container_name   = "${var.app_name}-${var.app_environment}-container"
-    container_port   = 8080
+    container_port   = 8000
   }
 
   depends_on = [aws_lb_listener.listener]
