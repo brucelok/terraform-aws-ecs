@@ -17,7 +17,6 @@ resource "aws_service_discovery_service" "fargate" {
 
   health_check_config {
     failure_threshold = 10
-    resource_path     = "path"
     type              = "HTTP"
   }
 }
