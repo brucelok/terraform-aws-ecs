@@ -36,7 +36,7 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
     "cpu": 256,
     "memory": 512,
     "networkMode": "awsvpc",
-    "image": "registry.gitlab.com/lok.bruce/mkdocs:latest",
+    "image": "${var.docker_image}",
     "entryPoint": [],
     "essential": true,
     "logConfiguration": {
@@ -83,6 +83,10 @@ resource "aws_ecs_service" "aws-ecs-service" {
       aws_security_group.service_security_group.id,
       aws_security_group.load_balancer_security_group.id
     ]
+  }
+
+  service_registries {
+    registry_arn = "${aws_service_discovery_service.fargate.arn}"
   }
 
   load_balancer {

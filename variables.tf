@@ -10,6 +10,11 @@
 #  description = "AWS Secret Key"
 #}
 
+variable "docker_image" {
+  type        = string
+  description = "docker image url"
+}
+
 variable "aws_key_pair_name" {
   type        = string
   description = "AWS Key Pair Name"
