@@ -25,16 +25,14 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
   family                   = "${var.app_name}-task"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
-  memory                   = "512"
-  cpu                      = "256"
+  memory                   = "2048"
+  cpu                      = "1024"
   execution_role_arn       = aws_iam_role.ecsTaskExecutionRole.arn
   task_role_arn            = aws_iam_role.ecsTaskExecutionRole.arn
   container_definitions    = <<DEFINITION
 [
   {
     "name": "${var.app_name}-${var.app_environment}-container",
-    "cpu": 256,
-    "memory": 512,
     "networkMode": "awsvpc",
     "image": "${var.docker_image}",
     "entryPoint": [],
