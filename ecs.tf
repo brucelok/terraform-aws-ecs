@@ -73,7 +73,7 @@ resource "aws_ecs_service" "aws-ecs-service" {
   task_definition      = "${aws_ecs_task_definition.aws-ecs-task.family}:${max(aws_ecs_task_definition.aws-ecs-task.revision, data.aws_ecs_task_definition.main.revision)}"
   launch_type          = "FARGATE"
   scheduling_strategy  = "REPLICA"
-  desired_count        = 1
+  desired_count        = 2
   force_new_deployment = true
 
   network_configuration {
@@ -85,10 +85,10 @@ resource "aws_ecs_service" "aws-ecs-service" {
     ]
   }
 
-  service_registries {
-    registry_arn = "${aws_service_discovery_service.fargate.arn}"
-    port         = 8000
-  }
+#  service_registries {
+#    registry_arn = "${aws_service_discovery_service.fargate.arn}"
+#    port         = 8000
+#  }
 
   load_balancer {
     target_group_arn = aws_lb_target_group.target_group.arn

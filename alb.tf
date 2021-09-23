@@ -25,8 +25,8 @@ resource "aws_security_group" "load_balancer_security_group" {
   }
 
   ingress {
-    from_port        = 80
-    to_port          = 80
+    from_port        = 8000
+    to_port          = 8000
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
@@ -47,7 +47,7 @@ resource "aws_security_group" "load_balancer_security_group" {
 
 resource "aws_lb_target_group" "target_group" {
   name        = "${var.app_name}-${var.app_environment}-tg"
-  port        = 80
+  port        = 8000
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = aws_vpc.my-vpc.id
@@ -70,7 +70,7 @@ resource "aws_lb_target_group" "target_group" {
 
 resource "aws_lb_listener" "listener" {
   load_balancer_arn = aws_alb.application_load_balancer.id
-  port              = "80"
+  port              = "8000"
   protocol          = "HTTP"
 
   default_action {
